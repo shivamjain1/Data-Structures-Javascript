@@ -15,14 +15,14 @@ Example use cases
 */
 
 const debounce = (func, delay) => {
-    let inDebounce;
-    return function(){
-        const context = this;
-        const args = arguments;
-        clearTimeout(inDebounce);
-        inDebounce = setTimeout(()=> func.apply(context, args), delay)
-    }
-}
+  let inDebounce;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(inDebounce);
+    inDebounce = setTimeout(() => func.apply(context, args), delay);
+  };
+};
 
 /* debounce == If we are invoking for the first time, our function will execute at the end of our delay. If we invoke and then invoke again before the end of our delay, the delay restarts
 
@@ -33,22 +33,23 @@ const debounce = (func, delay) => {
 */
 
 const throttle = (func, delay) => {
-    let inThrottle = false; 
-    return function(){
-        const context = this;
-        const args = arguments;
-        
-        if(inThrottle){
-            return;
-        }
-        inThrottle = true;
-        func.apply(context, args);
-        setTimeout(()=> {inThrottle = false;}, delay);
+  let inThrottle = false;
+  return function () {
+    const context = this;
+    const args = arguments;
+
+    if (inThrottle) {
+      return;
     }
-}
+    inThrottle = true;
+    func.apply(context, args);
+    setTimeout(() => {
+      inThrottle = false;
+    }, delay);
+  };
+};
 
 /* Throttle == The first call to our function will execute and sets the limit period inThrottle. We can call our function during this period but it will not fire until the throttle period has passed. Once it has passed, the next invocation will fire and the process repeats.
 
 When this function is called for the first time, inThrottle is assigned to false. Then once the returned function is called again, inThrottle is set to true and the callback function (fn) is executed. Then inThrottle becomes false again in delay ms. In the meantime, while inThrottle is true, none of the execution of the returned function from throttle can be executed.
 */
-
