@@ -12,3 +12,16 @@ Array.prototype.flatten = function(){
 };
 
 console.log(arr.flatten());
+
+/* Array Flat with depth d */
+
+function flatten(arr, d=0) {
+    return d>0 ? arr.reduce(function(acc, next){
+      let isArray =  Array.isArray(next)
+      return acc.concat(isArray ? flatten(next, d-1) : next)
+    }, []) : arr.slice();
+}
+Array.prototype.flatten = function(d){
+	return flatten(this, d);
+};
+console.log(arr.flatten(2));
