@@ -37,7 +37,7 @@ function getValues(parent) {
         temp[names[i]] = {};
       }
       if (i === names.length - 1) {
-        temp[names[i]] = input.value;
+        temp[names[i]] = inputValue;
       }
       temp = temp[names[i]];
     }
